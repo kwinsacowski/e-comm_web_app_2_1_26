@@ -1,49 +1,66 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../redux/store';
+
 
 const NavBar: React.FC = () => {
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
+  // Total quantity in cart
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <nav
-      className="navbar"
+      className="navbar navbar-expand-lg"
       style={{
         background: 'linear-gradient(90deg, #49a1b1, #6bdaff)',
-        padding: '0.5rem 1rem',
+        padding: '0.8rem 2rem',
       }}
     >
-      <div className="container d-flex justify-content-between align-items-center">
-        {/* Left: Store Name */}
-        <Link className="navbar-brand" to="/" style={{ fontWeight: 700, color: 'white' }}>
+      <div className="container-fluid d-flex align-items-center">
+
+        {/* LEFT — Brand */}
+        <Link
+          to="/"
+          className="navbar-brand fw-bold text-white"
+          style={{ fontSize: '1.6rem' }}
+        >
           Brivana
         </Link>
 
-        {/* Center: Links */}
-        <div className="d-flex gap-4">
-          <Link className="nav-link no-decoration text-white" to="/">
-            Home (Shop all Products)
+        {/* CENTER — Links */}
+        <div className="mx-auto d-flex gap-4">
+          <Link className="nav-link text-white fw-semibold" to="/">
+            Home
           </Link>
-          <Link className="nav-link no-decoration text-white" to="/shop">
+          <Link className="nav-link text-white fw-semibold" to="/shop">
             Shop By Category
           </Link>
         </div>
 
-        {/* Right: Cart */}
+        {/* RIGHT — Cart with Count */}
         <Link
           to="/cart"
+          className="position-relative nav-link text-white d-flex align-items-center"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.25rem',
-            color: 'white',
+            fontSize: '1.6rem',
             backgroundColor: '#ffa07a',
-            padding: '0.5rem 1rem',
+            padding: '0.4rem 0.8rem',
             borderRadius: '8px',
-            fontWeight: 600,
-            textDecoration: 'none',
           }}
         >
           <FaShoppingCart />
-          <span>Cart</span>
+
+          {cartCount > 0 && (
+            <span
+              className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style={{ fontSize: '0.7rem' }}
+            >
+              {cartCount}
+            </span>
+          )}
         </Link>
       </div>
     </nav>

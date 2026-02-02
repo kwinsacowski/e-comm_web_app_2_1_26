@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import { FaStar } from 'react-icons/fa';
 import coralImg from '../images/coral.jpg';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/cartSlice';
+
 
 interface Product {
   id: number;
@@ -31,9 +34,19 @@ const WelcomePage: React.FC = () => {
     queryFn: fetchProducts,
   });
 
-  const handleAddToCart = (product: Product) => {
-    console.log(`Added to cart: ${product.title}`);
-  };
+const dispatch = useDispatch();
+
+const handleAddToCart = (product: Product) => {
+  dispatch(
+    addToCart({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+    })
+  );
+};
 
   const placeholderImg = 'https://via.placeholder.com/250x150.png?text=No+Image';
 
