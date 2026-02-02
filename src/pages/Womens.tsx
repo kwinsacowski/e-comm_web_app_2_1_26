@@ -1,11 +1,12 @@
+// src/pages/Womens.tsx
 import React from 'react';
 import NavBar from '../components/NavBar';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import { FaStar } from 'react-icons/fa';
 import coralImg from '../images/coral.jpg';
+import { Link } from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -14,10 +15,7 @@ interface Product {
   description: string;
   category: string;
   image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
+  rating: { rate: number; count: number };
 }
 
 const fetchProducts = async (): Promise<Product[]> => {
@@ -25,75 +23,59 @@ const fetchProducts = async (): Promise<Product[]> => {
   return res.data;
 };
 
-const WelcomePage: React.FC = () => {
+const Womens: React.FC = () => {
   const { data: products, isLoading, isError } = useQuery<Product[]>({
     queryKey: ['products'],
     queryFn: fetchProducts,
   });
 
-  const handleAddToCart = (product: Product) => {
-    console.log(`Added to cart: ${product.title}`);
-  };
-
+  const womens = products?.filter((p) => p.category === "women's clothing");
   const placeholderImg = 'https://via.placeholder.com/250x150.png?text=No+Image';
+  const handleAddToCart = (product: Product) => console.log(`Added to cart: ${product.title}`);
 
   return (
-    <div className="welcome-page">
+    <div className="category-page">
       <NavBar />
 
-      {/* Hero Section */}
-      <header
-        className="hero-section"
-        style={{
-          backgroundImage: `url(${coralImg})`,
-        }}
-      >
-        <h1>Welcome to Brivana!</h1>
-        <p className="lead">Your one-stop destination for soft luxurious fashion.</p>
+      <header className="hero-section" style={{ backgroundImage: `url(${coralImg})` }}>
+        <h1>Women's Clothing</h1>
+        <p className="lead">Stylish and comfortable apparel for women.</p>
         <Link to="/shop">
-          <Button style={{ backgroundColor: '#f3a488', borderColor: 'rgb(207, 207, 206)' }} className="mt-3">Shop Now</Button>
+          <Button style={{ backgroundColor: '#f3a488', borderColor: 'rgb(207, 207, 206)' }} className="mt-3">
+            Back to Shop
+          </Button>
         </Link>
       </header>
 
-      {/* Products Section */}
       <section className="products-section">
         <Container>
-          <h2 className="text-center mb-4">Product List</h2>
+          <h2 className="text-center mb-4">Women's Products</h2>
 
           {isLoading && <p className="text-center text-white">Loading products...</p>}
           {isError && <p className="text-center text-danger">Error fetching products.</p>}
 
           <Row>
-            {products?.map((product) => (
+            {womens?.map((product) => (
               <Col key={product.id} md={6} className="mb-4">
-                <Card className="product-card h-100 shadow-sm">
+                <Card className="product-card h-100 shadow-sm" style={{ backgroundColor: 'rgba(220,220,220,0.7)' }}>
                   <Card.Img
                     variant="top"
                     src={product.image}
                     alt={product.title}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = placeholderImg;
-                    }}
+                    onError={(e) => ((e.target as HTMLImageElement).src = placeholderImg)}
                     className="product-image"
                   />
-
                   <Card.Body className="d-flex flex-column">
                     <Card.Title className="text-center">{product.title}</Card.Title>
-                    <Card.Text className="text-center mb-2 price-text">
-                      ${product.price.toFixed(2)}
-                    </Card.Text>
+                    <Card.Text className="text-center mb-2 price-text">${product.price.toFixed(2)}</Card.Text>
                     <Card.Text className="category-text">
                       <strong>Category:</strong> {product.category}
                     </Card.Text>
                     <Card.Text className="description-text">{product.description}</Card.Text>
 
-                    {/* Rating */}
                     <div className="text-center mb-2">
                       {Array.from({ length: 5 }, (_, i) => (
-                        <FaStar
-                          key={i}
-                          color={i < Math.round(product.rating.rate) ? '#e9bb87' : '#ccc'}
-                        />
+                        <FaStar key={i} color={i < Math.round(product.rating.rate) ? '#e9bb87' : '#ccc'} />
                       ))}
                     </div>
 
@@ -111,7 +93,6 @@ const WelcomePage: React.FC = () => {
         </Container>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Brivana. All rights reserved.</p>
       </footer>
@@ -119,4 +100,4 @@ const WelcomePage: React.FC = () => {
   );
 };
 
-export default WelcomePage;
+export default Womens;

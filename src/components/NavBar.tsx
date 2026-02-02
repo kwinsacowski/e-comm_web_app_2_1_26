@@ -8,32 +8,46 @@ const NavBar: React.FC = () => {
       className="navbar"
       style={{
         background: 'linear-gradient(90deg, #49a1b1, #6bdaff)',
+        padding: '0.5rem 1rem',
       }}
     >
-        <div className="container d-flex justify-content-between align-items-center">
-        {/* Store Name Left */}
-        <Link className="navbar-brand" to="/">Brivana</Link>
+      <div className="container d-flex justify-content-between align-items-center">
+        {/* Left: Store Name */}
+        <Link className="navbar-brand" to="/" style={{ fontWeight: 700, color: 'white' }}>
+          Brivana
+        </Link>
 
-        {/* Centered Links */}
-        <div className="d-flex justify-content-center flex-grow-1">
-          <ul className="navbar-nav d-flex flex-row gap-4">
-            <li className="nav-item">
-              <Link className="nav-link no-decoration" to="/">Home (Shop all Products)</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link no-decoration" to="/shop">Shop By Category</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link no-decoration d-flex align-items-center" to="/cart">
-                <FaShoppingCart />
-              </Link>
-            </li>
-          </ul>
+        {/* Center: Links */}
+        <div className="d-flex gap-4">
+          <Link className="nav-link no-decoration text-white" to="/">
+            Home (Shop all Products)
+          </Link>
+          <Link className="nav-link no-decoration text-white" to="/shop">
+            Shop By Category
+          </Link>
         </div>
+
+        {/* Right: Cart */}
+        <Link
+          to="/cart"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.25rem',
+            color: 'white',
+            backgroundColor: '#ffa07a',
+            padding: '0.5rem 1rem',
+            borderRadius: '8px',
+            fontWeight: 600,
+            textDecoration: 'none',
+          }}
+        >
+          <FaShoppingCart />
+          <span>Cart</span>
+        </Link>
       </div>
     </nav>
   );
 };
-
 
 export default NavBar;

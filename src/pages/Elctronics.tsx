@@ -1,11 +1,12 @@
+// src/pages/Electronics.tsx
 import React from 'react';
 import NavBar from '../components/NavBar';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import { FaStar } from 'react-icons/fa';
 import coralImg from '../images/coral.jpg';
+import { Link } from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -20,12 +21,13 @@ interface Product {
   };
 }
 
+// Fetch all products
 const fetchProducts = async (): Promise<Product[]> => {
   const res = await axios.get('https://fakestoreapi.com/products');
   return res.data;
 };
 
-const WelcomePage: React.FC = () => {
+const Electronics: React.FC = () => {
   const { data: products, isLoading, isError } = useQuery<Product[]>({
     queryKey: ['products'],
     queryFn: fetchProducts,
@@ -37,36 +39,42 @@ const WelcomePage: React.FC = () => {
 
   const placeholderImg = 'https://via.placeholder.com/250x150.png?text=No+Image';
 
+  // Filter only electronics
+  const electronics = products?.filter((p) => p.category === 'electronics');
+
   return (
-    <div className="welcome-page">
+    <div className="category-page">
       <NavBar />
 
       {/* Hero Section */}
       <header
         className="hero-section"
-        style={{
-          backgroundImage: `url(${coralImg})`,
-        }}
+        style={{ backgroundImage: `url(${coralImg})` }}
       >
-        <h1>Welcome to Brivana!</h1>
-        <p className="lead">Your one-stop destination for soft luxurious fashion.</p>
+        <h1>Electronics</h1>
+        <p className="lead">Discover the latest tech and gadgets.</p>
         <Link to="/shop">
-          <Button style={{ backgroundColor: '#f3a488', borderColor: 'rgb(207, 207, 206)' }} className="mt-3">Shop Now</Button>
+          <Button
+            style={{ backgroundColor: '#f3a488', borderColor: 'rgb(207, 207, 206)' }}
+            className="mt-3"
+          >
+            Back to Shop
+          </Button>
         </Link>
       </header>
 
       {/* Products Section */}
       <section className="products-section">
         <Container>
-          <h2 className="text-center mb-4">Product List</h2>
+          <h2 className="text-center mb-4">Electronics Products</h2>
 
           {isLoading && <p className="text-center text-white">Loading products...</p>}
           {isError && <p className="text-center text-danger">Error fetching products.</p>}
 
           <Row>
-            {products?.map((product) => (
+            {electronics?.map((product) => (
               <Col key={product.id} md={6} className="mb-4">
-                <Card className="product-card h-100 shadow-sm">
+                <Card className="product-card h-100 shadow-sm" style={{ backgroundColor: 'rgba(220,220,220,0.7)' }}>
                   <Card.Img
                     variant="top"
                     src={product.image}
@@ -87,7 +95,6 @@ const WelcomePage: React.FC = () => {
                     </Card.Text>
                     <Card.Text className="description-text">{product.description}</Card.Text>
 
-                    {/* Rating */}
                     <div className="text-center mb-2">
                       {Array.from({ length: 5 }, (_, i) => (
                         <FaStar
@@ -119,4 +126,4 @@ const WelcomePage: React.FC = () => {
   );
 };
 
-export default WelcomePage;
+export default Electronics;
