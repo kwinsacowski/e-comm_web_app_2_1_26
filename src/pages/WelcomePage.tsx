@@ -64,7 +64,7 @@ const handleAddToCart = (product: Product) => {
         <h1>Welcome to Brivana!</h1>
         <p className="lead">Your one-stop destination for soft luxurious fashion.</p>
         <Link to="/shop">
-          <Button style={{ backgroundColor: '#f3a488', borderColor: 'rgb(207, 207, 206)' }} className="mt-3">Shop Now</Button>
+          <Button style={{ backgroundColor: '#f3a488', borderColor: 'rgb(207, 207, 206)' }} className="mt-3">Shop By Category</Button>
         </Link>
       </header>
 
