@@ -39,7 +39,7 @@ const CategoryPage: React.FC<Props> = ({
         <h1>{title}</h1>
         <p className="lead">{description}</p>
         <Link to="/shop">
-          <Button className="mt-3">Back to Shop</Button>
+          <Button style={{ backgroundColor: '#f3a488', borderColor: 'rgb(207, 207, 206)' }}  className="mt-3">Back to Shop</Button>
         </Link>
       </header>
 
