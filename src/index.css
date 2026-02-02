@@ -1,0 +1,197 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #c1f0f6, #fef9f3); /* ocean sky to sandy beach */
+  color: #03396c; /* deep coastal blue */
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* =======================
+   Typography
+   ======================= */
+h1, h2, h3, h4, h5, h6 {
+  color: #011f4b; /* darker blue for headings */
+  font-weight: 700;
+}
+
+p {
+  color: #03396c;
+  font-size: 1rem;
+}
+
+/* =======================
+   Container
+   ======================= */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* =======================
+   Navbar
+   ======================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #00bfff; /* bright ocean blue */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #f3a488;
+  text-decoration: none; 
+}
+
+.navbar .nav-link {
+  text-decoration: none;
+}
+
+/* =======================
+   Buttons
+   ======================= */
+button {
+  background: #f3a488; /* coral */
+  color: #03396c;
+  border: solid;
+  padding: 0.6rem 1.2rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #ffa07a; /* lighter coral */
+  transform: translateY(-2px);
+}
+
+/* =======================
+   Cards
+   ======================= */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* =======================
+   Links
+   ======================= */
+a {
+  color: #00bfff; /* ocean blue links */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #ff7f50; /* coral hover */
+}
+
+/* =======================
+   Forms
+   ======================= */
+input, select, textarea {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #00bfff;
+  box-shadow: 0 0 5px #00bfff;
+}
+
+/* =======================
+   Footer
+   ======================= */
+footer {
+  background: #478baa; /* dark coastal blue */
+  color: white;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+}
+
+/* =======================
+   Misc Utilities
+   ======================= */
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 2rem; }
+
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+.p-3 { padding: 2rem; }
+
+.welcome-page {
+  background-color: #c1f0f6;
+  background-size: cover;        /* cover the entire viewport */
+  background-position: center;   /* center the image */
+  background-repeat: no-repeat;
+  min-height: 100vh;             /* full height */
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-page header {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+}
+
